@@ -1,5 +1,7 @@
-var express =  require("express");
-
+var express = require("express");
+var React = require("react");
+var { renderToString } = require("react-dom/server");
+var App = require("../client/app");
 
 const app = express();
 
@@ -9,10 +11,11 @@ app.get("*", (req, res) => {
   res.send(`
       <!DOCTYPE html>
       <head>
-        <title>Cronj Tutorials</title>
+        <title>CronJ Blog</title>
+        <script src="/bundle.js" defer></script>
       </head>
       <body>
-        <div>Here I am from serve</div>
+        <div id="root">{renderToString(<App />)}</div>
       </body>
     </html>
   `);
